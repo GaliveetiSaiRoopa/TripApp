@@ -54,7 +54,7 @@ const Home = () => {
   return (
     <>
       <div className="sticky top-0 bg-purple-400/[55] z-10 w-full">
-        <div className=" px-4 flex justify-between py-4 items-center">
+        <div className=" px-4 flex justify-between py-4 items-center w-full">
           <div className="flex gap-4 w-[60%]">
             <img src={logo} alt="logo" />
             <div className="flex gap-4 pt-3 justify-center">
@@ -67,16 +67,16 @@ const Home = () => {
             </div>
           </div>
           <div className="flex gap-4 w-[40%]">
-            <div className="flex gap-3 pt-3 justify-center">
+            <div className="flex gap-3 pt-3 justify-center w-[30%]">
               <p className="text-white font-bold text-base">USD</p>
               <p className="text-white font-extralight">|</p>
               <p className="text-white font-bold text-base">United States</p>
             </div>
-            <div className="flex gap-3">
-              <button className="w-44 h-12 bg-white text-indigo-950 rounded-md text-sm px-6">
+            <div className="flex gap-3 w-[60%]">
+              <button className="w-[50%] h-12 bg-white text-indigo-950 rounded-md text-sm px-6">
                 Become An Expert
               </button>
-              <button className="w-44 h-12 border border-white rounded-md text-sm px-6 text-white font-semibold">
+              <button className="w-[50%] h-12 border border-white rounded-md text-sm px-6 text-white font-semibold">
                 Sign In / Register
               </button>
             </div>
