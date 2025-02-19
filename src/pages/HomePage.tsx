@@ -1,53 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { navbarData } from "../utils/helpers";
+import PopularDestinations from "./popular-destinations/PopularDestinations";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  return (
-    <div className="min-h-screen w-full relative">
-      <div className="relative">
-        <div className="fixed top-0 h-[70px] bg-blue-600 w-full flex justify-between px-[80px] py-[10px] items-center text-white font-semibold">
-          <div className="cursor-pointer">
-            <img
-              src="./icons/logo.webp"
-              alt="logo"
-              className="w-12 h-12 rounded-full"
-              onClick={() => navigate("/")}
-            />
-          </div>
-          <div className="flex gap-10">
-            <div className="flex gap-10">
-              {navbarData.map((item: any) => (
-                <div
-                  className="group relative cursor-pointer"
-                  key={item.name}
-                  onClick={() => navigate(item.link)}
-                >
-                  <p className="group-hover:text-yellow-400 font-semibold p-2">
-                    {item.name}
-                  </p>
-                  <div className="group-hover:bg-yellow-400 w-full h-[2px] absolute bottom-2 transition-all delay-100" />
-                </div>
-              ))}
-            </div>
+  const words = [
+    "Adventure",
+    "Family",
+    "Road",
+    "Solo",
+    "Island",
+    "Wellness",
+    "Honeymoon",
+  ];
 
-            <div className="cursor-pointer relative group">
-              <p className="group-hover:text-yellow-400 font-semibold p-2">
-                Login/SignUp
-              </p>
-              <div className="group-hover:bg-yellow-400 w-full h-[2px] absolute bottom-2 transition-all delay-100" />
-            </div>
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const [params, setParams] = useState({ place: "" });
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setParams((prev) => ({ ...prev, [name]: value }));
+  };
+
+  return (
+    <>
+      <div
+        className="min-h-screen w-full relative pt-[80px] bg-cover bg-center bg-no-repeat flex flex-col gap-10"
+        style={{ backgroundImage: "url('/icons/Homebackground.webp')" }}
+      >
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center flex-col gap-8">
+          <h1 className=" font-bold 2xl:text-6xl text-center text-blue-600 lg:text-5xl md:text-4xl 2xl:w-[1060px] lg:w-[850px] md:w-[400px] text-4xl">
+            Plan Your Next{" "}
+            <span className="text-yellow-500 2xl:text-7xl lg:text-6xl md:text-5xl text-4xl">
+              {" "}
+              {words[index]}{" "}
+            </span>{" "}
+            Trip
+          </h1>
+
+          <div className="2xl:w-[650px] lg:w-[520px] w-[400px] bg-white flex justify-between h-16 py-2 rounded-full px-4 shadow-lg shadow-blue-300">
+            <input
+              className="w-3/4 focus:outline-none"
+              type="text"
+              onChange={handleChange}
+              name="place"
+              value={params?.place}
+              placeholder="Find your next destination...."
+            />
+            <button className="bg-blue-700 text-white px-8 py-1 font-semibold rounded-full">
+              Search
+            </button>
           </div>
         </div>
-        <img
-          src="./icons/Homebackground.webp"
-          alt="Background"
-          className="w-full h-screen inset-0"
-        />
-        {/* navbar */}
       </div>
-    </div>
+      <div className="px-28 py-16">
+        <PopularDestinations />
+      </div>
+    </>
   );
 };
 
