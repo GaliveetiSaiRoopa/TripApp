@@ -1,14 +1,20 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import PlanTrip from "../pages/plan-a-trip/PlanTrip";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Layout = () => {
+
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/plan-a-trip" element={<PlanTrip />} />
-    </Routes>
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-grow">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
   );
 };
 
